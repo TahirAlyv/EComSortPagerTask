@@ -13,15 +13,17 @@ namespace ECommerce.UI.Controllers
             _productService = productService;
         }
 
-        public async Task<IActionResult> Index(int page=1, int category=0,bool sortOrder=false, bool sortPrice=false)
+        public async Task<IActionResult> Index(int page=1, int category=0,bool sortorder=false, bool sortprice=false)
         {
             int pageSize = 10;
             var items=await _productService.GetAllCategoryAsync(category);
             var products = items.Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
-            products = sortPrice ? products.OrderByDescending(p => p.UnitPrice).ToList() : products.OrderBy(p => p.UnitPrice).ToList();
-            products = sortOrder ? products.OrderBy(p => p.ProductName).ToList() : products;
-      
+         
+            products = sortprice ? products.OrderByDescending(p => p.UnitPrice).ToList() : products.OrderBy(p => p.UnitPrice).ToList();
+            products = sortorder ? products.OrderBy(p => p.ProductName).ToList() : products;
+
+
 
             var model= new ProductListViewModel
             {
@@ -30,8 +32,8 @@ namespace ECommerce.UI.Controllers
                 PageSize=pageSize,
                 CurrentPage=page,
                 CurrentCategory=category,
-                SortOrder=sortOrder,
-                SortPrice=sortPrice
+                SortOrder= sortorder,
+                SortPrice= sortprice
 
             };
             return View (model);

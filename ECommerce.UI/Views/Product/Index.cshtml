@@ -12,12 +12,12 @@ else
 {
 
 	<a class="btn btn-success"
-	   href="/product/index?page=@Model.CurrentPage&category=@Model.CurrentCategory&sortOrder=@(!Model.SortOrder)">
+	   href="/product/index?page=@Model.CurrentPage&category=@Model.CurrentCategory&sortorder=@(!Model.SortOrder)">
 		@(Model.SortOrder ? "Z-A" : "A-Z")
 	</a>
 
 	<a class="btn btn-success"
-	   href="/product/index?page=@Model.CurrentPage&category=@Model.CurrentCategory&sortPrice=@(!Model.SortPrice)">
+	   href="/product/index?page=@Model.CurrentPage&category=@Model.CurrentCategory&sortprice=@(!Model.SortPrice)">
 		@(Model.SortPrice ? "Price: Low to High" : "Price: High to Low")
 	</a>
 	
@@ -58,6 +58,8 @@ else
 				page-count="Model.PageCount"
 				page-size="Model.PageSize"
 				current-category="Model.CurrentCategory"
+				sort-order="Model.SortOrder"
+				sort-price="Model.SortPrice"
 	></porduct-list-pager>
 
 
