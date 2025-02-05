@@ -1,0 +1,65 @@
+﻿@model ProductListViewModel
+
+
+
+
+
+@if(Model.Products==null || Model.Products.Count==0)
+{
+	<span class="btn-success">No Product exist</span>
+}
+else
+{
+
+	<a class="btn btn-success"
+	   href="/product/index?page=@Model.CurrentPage&category=@Model.CurrentCategory&sortOrder=@(!Model.SortOrder)">
+		@(Model.SortOrder ? "Z-A" : "A-Z")
+	</a>
+
+	<a class="btn btn-success"
+	   href="/product/index?page=@Model.CurrentPage&category=@Model.CurrentCategory&sortPrice=@(!Model.SortPrice)">
+		@(Model.SortPrice ? "Price: Low to High" : "Price: High to Low")
+	</a>
+	
+	<table class="table">
+	<thead>
+		<tr>
+			<th>Product Name</th>
+			<th>Product Price</th>
+			<th>Units In Stock</th>
+			<th>#</th>
+		</tr>
+	</thead>
+
+			<tbody>
+				@foreach( var item in Model.Products)
+				{
+					<tr>
+						<td>
+							@item.ProductName
+						</td>
+						<td>
+							@item.UnitPrice
+						</td>
+						<td>
+							@item.UnitsInStock
+						</td>
+						<td>
+							<a class="btn btn-xs btn-success">Add to Cart</a>
+						</td>
+					</tr>
+				}
+
+			</tbody>
+	</table>
+
+	<porduct-list-pager
+				current-page="Model.CurrentPage"
+				page-count="Model.PageCount"
+				page-size="Model.PageSize"
+				current-category="Model.CurrentCategory"
+	></porduct-list-pager>
+
+
+	
+}
