@@ -17,13 +17,13 @@ namespace ECommerce.UI.Controllers
         {
             int pageSize = 10;
             var items=await _productService.GetAllCategoryAsync(category);
+
+
+
+            items = sortprice ? items.OrderByDescending(p => p.UnitPrice).ToList() : items.OrderBy(p => p.UnitPrice).ToList();
+            items = sortorder ? items.OrderBy(p => p.ProductName).ToList() : items;
+
             var products = items.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-         
-            products = sortprice ? products.OrderByDescending(p => p.UnitPrice).ToList() : products.OrderBy(p => p.UnitPrice).ToList();
-            products = sortorder ? products.OrderBy(p => p.ProductName).ToList() : products;
-
-
 
             var model= new ProductListViewModel
             {
